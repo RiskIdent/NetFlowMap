@@ -30,26 +30,48 @@ NetFlowMap was **developed entirely with AI** as an exploratory project. There m
 
 ---
 
-## Quick Start with Docker Compose
+## Quick Start with Docker
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/RiskIdent/NetFlowMap.git
-   cd NetFlowMap
-   ```
+The easiest way to run NetFlowMap:
 
-2. **Create configuration**
+1. **Download example configuration**
    ```bash
-   cp configs/config.example.yml config.yml
+   curl -O https://raw.githubusercontent.com/RiskIdent/NetFlowMap/main/configs/config.example.yml
+   mv config.example.yml config.yml
    # Edit config.yml with your settings
    ```
 
-3. **Start with Docker Compose**
+2. **Run the container**
+   ```bash
+   docker run -d \
+     -p 8080:8080 \
+     -p 2055:2055/udp \
+     -v $(pwd)/config.yml:/app/config.yml:ro \
+     ghcr.io/riskident/netflowmap:latest
+   ```
+
+3. **Access the web interface**
+   
+   Open http://localhost:8080 in your browser.
+
+---
+
+## Quick Start with Docker Compose
+
+1. **Download the required files**
+   ```bash
+   curl -O https://raw.githubusercontent.com/RiskIdent/NetFlowMap/main/docker-compose.yml
+   curl -O https://raw.githubusercontent.com/RiskIdent/NetFlowMap/main/configs/config.example.yml
+   mv config.example.yml config.yml
+   # Edit config.yml with your settings
+   ```
+
+2. **Start with Docker Compose**
    ```bash
    docker compose up -d
    ```
 
-4. **Access the web interface**
+3. **Access the web interface**
    
    Open http://localhost:8080 in your browser.
 

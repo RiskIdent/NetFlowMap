@@ -1,6 +1,6 @@
 services:
   netflowmap:
-    build: .
+    image: ghcr.io/riskident/netflowmap:latest
     container_name: netflowmap
     ports:
       # Web UI
