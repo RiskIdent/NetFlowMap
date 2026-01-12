@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kai/netflowmap/internal/netflow"
+	"github.com/RiskIdent/NetFlowMap/internal/netflow"
 )
 
 func TestNewStore(t *testing.T) {

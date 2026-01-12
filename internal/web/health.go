@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kai/netflowmap/internal/auth"
+	"github.com/RiskIdent/NetFlowMap/internal/auth"
 )
 
 // DetailedHealthResponse contains comprehensive health statistics.

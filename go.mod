@@ -1,4 +1,4 @@
-module github.com/kai/netflowmap
+module github.com/RiskIdent/NetFlowMap
 
 go 1.25.3
 

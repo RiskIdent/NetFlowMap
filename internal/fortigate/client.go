@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 )
 
 // Client provides access to the FortiGate REST API.

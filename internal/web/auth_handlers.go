@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/kai/netflowmap/internal/auth"
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/auth"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 )
 
 // AuthConfigResponse is the response for /auth/config.

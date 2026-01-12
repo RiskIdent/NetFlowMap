@@ -7,10 +7,10 @@ import (
 	"strings"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/kai/netflowmap/internal/auth"
-	"github.com/kai/netflowmap/internal/flowstore"
-	"github.com/kai/netflowmap/internal/logging"
-	"github.com/kai/netflowmap/internal/netflow"
+	"github.com/RiskIdent/NetFlowMap/internal/auth"
+	"github.com/RiskIdent/NetFlowMap/internal/flowstore"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/netflow"
 )
 
 // APIResponse is a generic API response wrapper.

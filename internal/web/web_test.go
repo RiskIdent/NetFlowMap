@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kai/netflowmap/internal/config"
-	"github.com/kai/netflowmap/internal/flowstore"
+	"github.com/RiskIdent/NetFlowMap/internal/config"
+	"github.com/RiskIdent/NetFlowMap/internal/flowstore"
 )
 
 func TestHealthEndpoint(t *testing.T) {

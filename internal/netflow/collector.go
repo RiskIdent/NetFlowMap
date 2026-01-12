@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 )
 
 // FlowHandler is a function that processes received flows.

@@ -14,14 +14,14 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/kai/netflowmap/internal/auth"
-	"github.com/kai/netflowmap/internal/config"
-	"github.com/kai/netflowmap/internal/flowstore"
-	"github.com/kai/netflowmap/internal/fortigate"
-	"github.com/kai/netflowmap/internal/geoip"
-	"github.com/kai/netflowmap/internal/logging"
-	"github.com/kai/netflowmap/internal/netflow"
-	"github.com/kai/netflowmap/internal/web"
+	"github.com/RiskIdent/NetFlowMap/internal/auth"
+	"github.com/RiskIdent/NetFlowMap/internal/config"
+	"github.com/RiskIdent/NetFlowMap/internal/flowstore"
+	"github.com/RiskIdent/NetFlowMap/internal/fortigate"
+	"github.com/RiskIdent/NetFlowMap/internal/geoip"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/netflow"
+	"github.com/RiskIdent/NetFlowMap/internal/web"
 	"golang.org/x/term"
 )
 

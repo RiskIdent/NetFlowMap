@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/yaml.v3"
 )

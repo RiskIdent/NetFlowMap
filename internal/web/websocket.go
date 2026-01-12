@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/kai/netflowmap/internal/auth"
-	"github.com/kai/netflowmap/internal/flowstore"
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/auth"
+	"github.com/RiskIdent/NetFlowMap/internal/flowstore"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 )
 
 // createWebSocketUpgrader creates a WebSocket upgrader with proper origin validation.

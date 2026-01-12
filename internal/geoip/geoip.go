@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 	"github.com/oschwald/maxminddb-golang"
 )
 

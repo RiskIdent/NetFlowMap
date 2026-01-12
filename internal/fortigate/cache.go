@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 )
 
 // Cache stores FortiGate address objects with automatic refresh.

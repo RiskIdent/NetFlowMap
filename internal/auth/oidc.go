@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/coreos/go-oidc/v3/oidc"
-	"github.com/kai/netflowmap/internal/config"
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/config"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 	"golang.org/x/oauth2"
 )
 

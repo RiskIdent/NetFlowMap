@@ -3,8 +3,8 @@ package fortigate
 import (
 	"sync"
 
-	"github.com/kai/netflowmap/internal/config"
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/config"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 )
 
 // Manager manages multiple FortiGate caches, one per configured source.

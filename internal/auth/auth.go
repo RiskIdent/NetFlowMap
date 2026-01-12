@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/kai/netflowmap/internal/config"
-	"github.com/kai/netflowmap/internal/logging"
+	"github.com/RiskIdent/NetFlowMap/internal/config"
+	"github.com/RiskIdent/NetFlowMap/internal/logging"
 )
 
 // contextKey is a type for context keys.
