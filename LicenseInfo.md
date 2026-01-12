@@ -90,7 +90,7 @@ All licenses used are compatible with NetFlowMap's MIT License:
 - **Open Database License (ODbL)**: OpenStreetMap data (via CARTO Basemaps)
 - **CARTO Basemaps**: External service, no code redistribution required
 
-**Important:** CARTO Basemaps is an external service called at runtime. Map tiles are not redistributed as part of the code, therefore CARTO's Terms of Service do **not** prevent redistribution of the NetFlowMap code under an open-source license. The terms of service apply to using the service at runtime, not to code distribution.
+**Important:** CARTO Basemaps is an external service called at runtime. The terms of service apply to using the service at runtime, not to code distribution.
 
 ## Attribution Requirements
 
@@ -107,4 +107,4 @@ Attribution for OpenStreetMap and CARTO is automatically displayed in the map UI
 
 ---
 
-*Last updated: 2026-01-12*
+*Last updated: 2025-01-27*

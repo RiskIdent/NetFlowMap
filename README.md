@@ -2,6 +2,8 @@
 
 A real-time NetFlow visualization tool that displays network traffic on an interactive world map. Built with Go and designed for use with firewalls and routers that support NetFlow v9.
 
+NetFlowMap was **developed entirely with AI** as an exploratory project. There might be dragons. 🐉
+
 ![NetFlowMap Screenshot](docs/screenshot.png)
 
 ## Features
@@ -12,7 +14,7 @@ A real-time NetFlow visualization tool that displays network traffic on an inter
 - **Traffic Analysis**: 
   - Top 100 flows sorted by bandwidth
   - Aggregated traffic per remote IP
-  - Min. Traffic filter slider to focus on large transfers
+  - Min./Max. Traffic filter slider to focus on large/small transfers
 - **Sampling Support**: Automatic detection of NetFlow sampling with optional extrapolation
 - **FortiGate Integration**: Optional integration to resolve IP addresses to FortiGate address objects
 - **Traffic Filtering**: Filter by direction (inbound/outbound), IP addresses, countries, or text search
