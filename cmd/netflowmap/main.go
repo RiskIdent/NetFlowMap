@@ -26,7 +26,8 @@ import (
 )
 
 var (
-	version    = "1.0.11"
+	// version is set via ldflags at build time: -ldflags="-X main.version=1.0.12"
+	version    = "dev"
 	configPath string
 )
 
@@ -35,11 +36,18 @@ func main() {
 	flag.StringVar(&configPath, "config", "config.yml", "Path to configuration file")
 	showVersion := flag.Bool("version", false, "Show version and exit")
 	hashPassword := flag.Bool("hash-password", false, "Generate a password hash for users.yml")
+	healthCheck := flag.Bool("healthcheck", false, "Run health check and exit")
 	flag.Parse()
 
 	if *showVersion {
 		fmt.Printf("NetFlowMap v%s\n", version)
 		os.Exit(0)
+	}
+
+	// Handle healthcheck command (for Docker HEALTHCHECK)
+	if *healthCheck {
+		runHealthCheck()
+		return
 	}
 
 	// Handle hash-password command
@@ -361,6 +369,23 @@ func logStats(store *flowstore.Store, fgManager *fortigate.Manager, collector *n
 		"memory_sys_mb", fmt.Sprintf("%.1f", float64(memStats.Sys)/1024/1024),
 		"goroutines", runtime.NumGoroutine(),
 	)
+}
+
+// runHealthCheck performs a health check against the local server.
+func runHealthCheck() {
+	resp, err := http.Get("http://localhost:8080/api/health")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Health check failed: %v\n", err)
+		os.Exit(1)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		fmt.Fprintf(os.Stderr, "Health check failed: status %d\n", resp.StatusCode)
+		os.Exit(1)
+	}
+
+	os.Exit(0)
 }
 
 // runHashPassword interactively generates a password hash.
