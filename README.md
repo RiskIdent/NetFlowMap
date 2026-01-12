@@ -32,7 +32,7 @@ A real-time NetFlow visualization tool that displays network traffic on an inter
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/NetFlowMap.git
+   git clone https://github.com/RiskIdent/NetFlowMap.git
    cd NetFlowMap
    ```
 
@@ -82,7 +82,7 @@ ports:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/NetFlowMap.git
+   git clone https://github.com/RiskIdent/NetFlowMap.git
    cd NetFlowMap
    ```
 
