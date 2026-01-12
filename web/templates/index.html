@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetFlowMap - Network Flow Visualization</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin="">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="logo">
+                <span class="logo-icon">◉</span>
+                NetFlowMap
+            </h1>
+        </div>
+        <div class="header-center">
+            <div class="source-selector">
+                <label for="source-select">Source:</label>
+                <select id="source-select">
+                    <option value="">All Sources</option>
+                </select>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="stats">
+                <span id="flow-count" title="">0</span> on map
+                <span id="flows-without-location" class="flows-without-location hidden"></span>
+                <span id="flow-limit-info"></span>
+                <span class="separator">|</span>
+                <span id="connection-status" class="status-disconnected">●</span>
+            </div>
+            <div class="user-info" id="user-info">
+                <span id="user-name" class="user-name"></span>
+                <span id="user-role" class="user-role"></span>
+                <button id="health-btn" class="btn btn-small btn-health hidden" title="System Health">⚙</button>
+                <a href="/auth/login" id="login-btn" class="btn btn-small btn-login">Login</a>
+                <button id="logout-btn" class="btn btn-small btn-logout hidden">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Controls Panel -->
+    <div class="controls-panel">
+        <div class="control-group">
+            <label>Direction:</label>
+            <div class="button-group">
+                <button class="btn btn-direction active" data-direction="">All</button>
+                <button class="btn btn-direction btn-inbound" data-direction="in">
+                    <span class="arrow">↓</span> Inbound
+                </button>
+                <button class="btn btn-direction btn-outbound" data-direction="out">
+                    <span class="arrow">↑</span> Outbound
+                </button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="filter-input">Filter:</label>
+            <div class="filter-input-wrapper">
+                <input type="text" id="filter-input" placeholder="IP, country, city, protocol...">
+                <button id="filter-clear" class="filter-clear-btn" title="Clear filter">×</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="min-traffic-slider">Min. Traffic:</label>
+            <div class="slider-row">
+                <input type="range" id="min-traffic-slider" min="0" max="12" value="0" step="1">
+                <span id="min-traffic-value" class="slider-value">Off</span>
+                <button id="min-traffic-reset" class="btn-icon" title="Reset">×</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="max-traffic-slider">Max. Traffic:</label>
+            <div class="slider-row">
+                <input type="range" id="max-traffic-slider" min="0" max="6" value="0" step="1">
+                <span id="max-traffic-value" class="slider-value">Off</span>
+                <button id="max-traffic-reset" class="btn-icon" title="Reset">×</button>
+            </div>
+        </div>
+        <div class="control-group sampling-control hidden" id="sampling-control">
+            <label class="toggle-label">
+                <input type="checkbox" id="extrapolate-toggle">
+                <span class="toggle-text">Extrapolate sampled data</span>
+            </label>
+            <span id="sampling-info" class="sampling-info" title="Sampling configuration detected"></span>
+        </div>
+    </div>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item">
+            <span class="legend-line legend-inbound"></span>
+            <span>Inbound</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-line legend-outbound"></span>
+            <span>Outbound</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot legend-source"></span>
+            <span>Firewall</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-dot legend-remote"></span>
+            <span>Remote IP</span>
+        </div>
+    </div>
+
+    <!-- Info Panel (hidden by default) -->
+    <div id="info-panel" class="info-panel hidden">
+        <button id="info-close" class="info-close">×</button>
+        <div id="info-content"></div>
+    </div>
+
+    <!-- Health Modal (hidden by default) -->
+    <div id="health-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>System Health</h2>
+                <button id="health-close" class="modal-close">×</button>
+            </div>
+            <div class="modal-body" id="health-content">
+                <div class="health-loading">Loading...</div>
+            </div>
+            <div class="modal-footer">
+                <span id="health-last-update" class="health-update-time"></span>
+                <span class="health-auto-refresh">Auto-refresh: 10s</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unmapped Flows Modal (hidden by default) -->
+    <div id="unmapped-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content modal-content-wide">
+            <div class="modal-header">
+                <h2>Flows Without Location</h2>
+                <button id="unmapped-close" class="modal-close">×</button>
+            </div>
+            <div class="modal-body" id="unmapped-content">
+                <div class="unmapped-loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <!-- Custom JS -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+# Configuration files with secrets
+config.yml
+users.yml
+
+# GeoIP database
+data/
+*.mmdb
+
+# Build artifacts (binary in root directory only)
+/netflowmap
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Go workspace
+go.work
+go.work.sum
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug
+*.log
+debug/
+
+# Coverage
+coverage.out
+coverage.html
+
+# Temporary files
+tmp/
+temp/
+*.tmp

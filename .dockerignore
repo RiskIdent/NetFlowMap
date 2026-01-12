@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+
+# Build artifacts
+netflowmap
+*.exe
+bin/
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Configuration with secrets
+config.yml
+config.yaml
+users.yml
+users.yaml
+
+# Data directory (downloaded at runtime)
+data/
+*.mmdb
+
+# Documentation
+*.md
+!web/**/*.md
+
+# Docker files (avoid recursive builds)
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Test files
+*_test.go
+coverage.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+
+
+
+
+
+
+

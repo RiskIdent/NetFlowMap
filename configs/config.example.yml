@@ -1,0 +1,113 @@
+# NetFlowMap Configuration Example
+# Copy this file to config.yml and adjust the values
+
+# Server configuration
+server:
+  # HTTP server port for web interface
+  http_port: 8080
+  # NetFlow collector port (UDP)
+  netflow_port: 2055
+  # Set to true if running behind HTTPS (enables Secure cookie flag)
+  use_https: false
+  # Allowed origins for CORS and WebSocket connections
+  # If empty, only same-origin requests are allowed (recommended for production)
+  # allowed_origins:
+  #   - "https://netflowmap.example.com"
+
+# Logging configuration
+logging:
+  # Log level: debug, info, warning, error
+  level: info
+
+# GeoIP database configuration
+geoip:
+  # Directory to store the GeoIP database
+  database_path: "./data"
+  # Update interval in days
+  update_interval_days: 30
+
+# Flow display configuration
+flows:
+  # How long flows remain visible after last update (in seconds)
+  display_timeout_seconds: 60
+  # Maximum number of flows to display in the web UI (sorted by traffic)
+  max_display_flows: 100
+
+# Authentication configuration
+# Uncomment to enable authentication
+# auth:
+#   enabled: true
+#   # Secret key for signing session tokens (min 16 characters, required)
+#   # Supports environment variables: ${SESSION_SECRET} or $SESSION_SECRET
+#   session_secret: "${SESSION_SECRET}"
+#   # Session duration (default: 12h)
+#   session_duration: 12h
+#   
+#   # Rate limiting for login attempts (enabled by default when auth is enabled)
+#   rate_limit:
+#     enabled: true
+#     max_attempts: 5          # Max failed attempts before blocking
+#     window_duration: 15m     # Time window for counting attempts
+#     block_duration: 15m      # How long to block after exceeding max attempts
+#   
+#   # Local authentication (username/password from users.yml)
+#   local:
+#     enabled: true
+#     users_file: "users.yml"
+#   
+#   # OpenID Connect (OIDC) authentication
+#   # oidc:
+#   #   enabled: true
+#   #   issuer_url: "https://auth.example.com/realms/main"
+#   #   client_id: "netflowmap"
+#   #   client_secret: "${OIDC_CLIENT_SECRET}"  # Use env var for secrets
+#   #   redirect_url: "http://localhost:8080/auth/callback"
+#   #   # Usernames that are granted admin access
+#   #   admin_users:
+#   #     - "admin@example.com"
+#   #     - "kai"
+
+# NetFlow sources configuration
+# Each source represents a device sending NetFlow data
+sources:
+  # Example: Main office firewall
+  - id: "fw-main"
+    name: "Main Office Firewall"
+    # IP address of the device sending NetFlow data
+    source_ip: "192.168.1.1"
+    # Geographic location of this source (for map visualization)
+    latitude: 52.5200
+    longitude: 13.4050
+    # Optional: NetFlow sampling interval (default: 1 = no sampling)
+    # If your NetFlow exporter uses sampling (e.g., 1:100), set this value
+    # to enable extrapolation of traffic values in the web UI.
+    # This is used as fallback if no Options Template is received.
+    # sampling_interval: 100
+    
+    # Optional: Traffic filter rules
+    # filters:
+    #   include_networks:
+    #     - "0.0.0.0/0"
+    #   exclude_networks:
+    #     - "10.0.0.0/8"
+    #     - "172.16.0.0/12"
+    #     - "192.168.0.0/16"
+    
+    # Optional: FortiGate API integration
+    # Uncomment and configure to enable address object resolution
+    # fortigate:
+    #   host: "https://192.168.1.1"
+    #   token: "your-fortigate-api-token"
+    #   verify_ssl: false
+
+  # Example: Branch office firewall with FortiGate integration
+  # - id: "fw-branch"
+  #   name: "Branch Office Firewall"
+  #   source_ip: "192.168.2.1"
+  #   latitude: 48.1351
+  #   longitude: 11.5820
+  #   fortigate:
+  #     host: "https://192.168.2.1"
+  #     token: "branch-api-token"
+  #     verify_ssl: true
+

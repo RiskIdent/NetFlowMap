@@ -1,0 +1,27 @@
+# NetFlowMap - Local User Configuration
+# ======================================
+#
+# To generate a password hash, run:
+#   ./netflowmap --hash-password
+#
+# Roles:
+#   - admin: Full access to all data including private IPs
+#   - user:  Access to public IPs only, private IPs are hidden
+#
+# Note: Users without authentication (anonymous) can see the map
+#       but all IP addresses are hidden.
+
+users:
+  # Example admin user
+  - username: admin
+    role: admin
+    # Password: admin (CHANGE THIS!)
+    # Generate a new hash with: ./netflowmap --hash-password
+    password_hash: "$2a$10$N9qo8uLOickgx2ZMRZoMy.MQDOPVHoQV8r8K0N0oHFjJB.ey4vB.S"
+
+  # Example viewer user
+  - username: viewer
+    role: user
+    # Password: viewer (CHANGE THIS!)
+    password_hash: "$2a$10$K.0HwpsoPDgaB/i0bW.0Vu6RNJOqq7B.0ukEAjA8mRGVHmDGPWBsC"
+

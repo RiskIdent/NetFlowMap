@@ -1,0 +1,30 @@
+services:
+  netflowmap:
+    build: .
+    container_name: netflowmap
+    ports:
+      # Web UI
+      - "8080:8080"
+      # NetFlow UDP collector
+      - "2055:2055/udp"
+    volumes:
+      # Configuration file (required)
+      - ./config.yml:/app/config.yml:ro
+      # User credentials for local auth (optional)
+      - ./users.yml:/app/users.yml:ro
+      # GeoIP database storage (persistent)
+      - netflowmap-data:/app/data
+    restart: unless-stopped
+    # Optional: Set timezone
+    environment:
+      - TZ=Europe/Berlin
+
+volumes:
+  netflowmap-data:
+
+
+
+
+
+
+
